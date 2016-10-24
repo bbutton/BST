@@ -19,15 +19,15 @@ func (tn TreeNode) SetRight(right *TreeNode) {
 	tn.Right = right
 }
 
-func (bt BinaryTree) Search(searchKey int) (found *TreeNode, err error) {
-	if bt.Root == nil {
+func Search(searchKey int, root *TreeNode) (found *TreeNode, err error) {
+	if root == nil {
 		return nil, nil
 	}
 
-	key := bt.Root.Key
+	key := root.Key
 
 	if key == searchKey {
-		return bt.Root, nil
+		return root, nil
 	}
 
 	return nil, nil

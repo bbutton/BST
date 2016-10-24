@@ -8,26 +8,33 @@ import (
 )
 
 func TestSearchingEmptyTreeAlwaysReturnsNil(t *testing.T) {
-	binaryTree := binary_tree.BinaryTree{}
-
-	result, _ := binaryTree.Search(1)
+	result, _ := binary_tree.Search(1, nil)
 
 	assert.Nil(t, result)
 }
 
 func Test_RootNodeReturnedIfMatches(t *testing.T) {
-	binaryTree := binary_tree.BinaryTree{Root: &binary_tree.TreeNode{Key: 1, Value: 10}}
+	root := &binary_tree.TreeNode{Key: 1, Value: 10}
 
-	found, _ := binaryTree.Search(1)
+	result, _ := binary_tree.Search(1, root)
 
-	assert.Equal(t, found.Key, 1)
-	assert.Equal(t, found.Value, 10)
+	assert.Equal(t, result.Key, 1)
+	assert.Equal(t, result.Value, 10)
 }
 
 func Test_NilReturnedIfKeyDoesNotMatch(t *testing.T) {
-	binaryTree := binary_tree.BinaryTree{Root: &binary_tree.TreeNode{Key: 1, Value: 10}}
+	root := &binary_tree.TreeNode{Key: 1, Value: 10}
 
-	found, _ := binaryTree.Search(15)
+	found, _ := binary_tree.Search(15, root)
 
 	assert.Nil(t, found)
+}
+
+func xxTest_ReturnLeftNodeIfKeyMatches(t *testing.T) {
+	root := &binary_tree.TreeNode{Key: 10, Value: 10}
+	root.SetLeft(&binary_tree.TreeNode{Key: 5, Value: 15})
+
+	found, _ := binary_tree.Search(5, root)
+
+	assert.Equal(t, 5, found.Key)
 }
