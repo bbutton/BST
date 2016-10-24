@@ -54,3 +54,13 @@ func Test_WillRecurseSeveralLevelsOfLeftToMatchKey(t *testing.T) {
 
 	assert.Equal(t, 4, found.Key)
 }
+
+func Test_WillSearchRightWhenSearchKeyGreaterThanNodeKey(t *testing.T) {
+	root := &binary_tree.TreeNode{Key: 10, Value: 10}
+	root.SetRight(&binary_tree.TreeNode{Key: 15, Value: 15})
+
+	found, _ := binary_tree.Search(15, root)
+
+	assert.NotNil(t, found)
+	assert.Equal(t, 15, found.Key)
+}

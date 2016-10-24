@@ -37,6 +37,9 @@ func Search(searchKey int, root *TreeNode) (found *TreeNode, err error) {
 	} else if searchKey < root.Key {
 		fmt.Println("Looking for match on Left")
 		return Search(searchKey, root.Left)
+	} else if searchKey > root.Key {
+		fmt.Println("Looking for march on Right")
+		return Search(searchKey, root.Right)
 	}
 
 	fmt.Println("No match at all, returning nil, nil")
