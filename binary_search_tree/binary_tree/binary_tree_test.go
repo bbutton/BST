@@ -30,11 +30,14 @@ func Test_NilReturnedIfKeyDoesNotMatch(t *testing.T) {
 	assert.Nil(t, found)
 }
 
-func xxTest_ReturnLeftNodeIfKeyMatches(t *testing.T) {
+func Test_ReturnLeftNodeIfKeyMatches(t *testing.T) {
 	root := &binary_tree.TreeNode{Key: 10, Value: 10}
 	root.SetLeft(&binary_tree.TreeNode{Key: 5, Value: 15})
 
+	assert.NotNil(t, root.Left)
+
 	found, _ := binary_tree.Search(5, root)
 
+	assert.NotNil(t, found)
 	assert.Equal(t, 5, found.Key)
 }
