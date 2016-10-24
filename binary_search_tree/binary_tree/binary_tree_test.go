@@ -41,3 +41,16 @@ func Test_ReturnLeftNodeIfKeyMatches(t *testing.T) {
 	assert.NotNil(t, found)
 	assert.Equal(t, 5, found.Key)
 }
+
+func Test_WillRecurseSeveralLevelsOfLeftToMatchKey(t *testing.T) {
+	root := &binary_tree.TreeNode{Key: 10, Value: 10}
+	firstLeft := &binary_tree.TreeNode{Key: 5, Value: 15}
+	secondLeft := &binary_tree.TreeNode{Key: 4, Value: 15}
+
+	firstLeft.SetLeft(secondLeft)
+	root.SetLeft(firstLeft)
+
+	found, _ := binary_tree.Search(4, root)
+
+	assert.Equal(t, 4, found.Key)
+}
