@@ -1,7 +1,5 @@
 package binary_tree
 
-import "fmt"
-
 type TreeNode struct {
 	Key   int
 	Value int
@@ -22,26 +20,37 @@ func (tn *TreeNode) SetRight(right *TreeNode) {
 }
 
 func Search(searchKey int, root *TreeNode) (found *TreeNode, err error) {
-	fmt.Println("Entering search")
-
 	if root == nil {
-		fmt.Println("Leaving search, root == nil")
 		return nil, nil
 	}
 
-	fmt.Printf("Key: %d, Searchkey: %d\n", root.Key, searchKey)
-
 	if root.Key == searchKey {
-		fmt.Println("Returning match on root")
 		return root, nil
 	} else if searchKey < root.Key {
-		fmt.Println("Looking for match on Left")
 		return Search(searchKey, root.Left)
 	} else if searchKey > root.Key {
-		fmt.Println("Looking for march on Right")
 		return Search(searchKey, root.Right)
 	}
 
-	fmt.Println("No match at all, returning nil, nil")
 	return nil, nil
+}
+
+func traverse(root *TreeNode, traversedNodes []*TreeNode) []*TreeNode {
+	if root == nil {
+		return traversedNodes
+	}
+
+	traversedNodes = traverse(root.Left, traversedNodes)
+	traversedNodes = append(traversedNodes, root)
+	traversedNodes = traverse(root.Right, traversedNodes)
+
+	return traversedNodes
+}
+
+func Traverse(root *TreeNode) (nodes []*TreeNode, err error) {
+	traversedNodes := make([]*TreeNode, 0)
+
+	traversedNodes = traverse(root, traversedNodes)
+
+	return traversedNodes, nil
 }
